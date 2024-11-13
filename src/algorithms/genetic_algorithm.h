@@ -1,3 +1,5 @@
+// File: src/algorithms/genetic_algorithm.h
+
 #ifndef GENETIC_ALGORITHM_H
 #define GENETIC_ALGORITHM_H
 
@@ -8,7 +10,7 @@
 class GeneticAlgorithm {
 public:
     GeneticAlgorithm(const Parameters& params);
-    Solution run();
+    Solution run(); // Executes the GA and returns the best solution found
 
 private:
     Parameters parameters;
@@ -21,4 +23,4 @@ private:
     bool terminationConditionMet(int generation);
 };
 
-#endif 
+#endif // GENETIC_ALGORITHM_H

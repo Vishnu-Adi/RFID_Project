@@ -1,3 +1,5 @@
+// File: src/algorithms/particle_swarm.h
+
 #ifndef PARTICLE_SWARM_H
 #define PARTICLE_SWARM_H
 
@@ -8,7 +10,7 @@
 class ParticleSwarmOptimization {
 public:
     ParticleSwarmOptimization(const Parameters& params);
-    Particle run();
+    Particle run(); // Executes the PSO and returns the best particle found
 
 private:
     Parameters parameters;
@@ -20,6 +22,9 @@ private:
     void updateVelocities();
     void updatePositions();
     bool terminationConditionMet(int iteration);
+
+    // Helper method to initialize globalBest
+    void updateGlobalBest();
 };
 
 #endif // PARTICLE_SWARM_H

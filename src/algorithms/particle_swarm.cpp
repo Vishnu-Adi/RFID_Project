@@ -1,12 +1,19 @@
+// File: src/algorithms/particle_swarm.cpp
+
 #include "particle_swarm.h"
 #include <algorithm>
 #include <random>
 #include <limits>
 
+using namespace std;
+
 ParticleSwarmOptimization::ParticleSwarmOptimization(const Parameters& params)
     : parameters(params) {}
 
 Particle ParticleSwarmOptimization::run() {
+    GRID_SIZE = parameters.gridSize;
+    TOTAL_CELLS = GRID_SIZE * GRID_SIZE;
+
     int iteration = 0;
     initializeSwarm();
     evaluateFitness();
@@ -28,6 +35,7 @@ void ParticleSwarmOptimization::initializeSwarm() {
     std::uniform_real_distribution<> velDis(-parameters.velocityMax, parameters.velocityMax);
 
     swarm.resize(parameters.swarmSize);
+    globalBest.fitness = std::numeric_limits<double>::lowest();
 
     for (auto& particle : swarm) {
         particle.position.resize(parameters.numDimensions);
@@ -39,10 +47,10 @@ void ParticleSwarmOptimization::initializeSwarm() {
             particle.velocity[d] = velDis(gen);
             particle.bestPosition[d] = particle.position[d];
         }
-        particle.fitness = calculateFitness(particle.position);
+        particle.fitness = calculateFitness(particle.position, parameters.gridSize);
         particle.bestFitness = particle.fitness;
 
-        if (globalBest.fitness < particle.fitness) {
+        if (particle.fitness > globalBest.fitness) {
             globalBest = particle;
         }
     }
@@ -50,7 +58,7 @@ void ParticleSwarmOptimization::initializeSwarm() {
 
 void ParticleSwarmOptimization::evaluateFitness() {
     for (auto& particle : swarm) {
-        particle.fitness = calculateFitness(particle.position);
+        particle.fitness = calculateFitness(particle.position, parameters.gridSize);
 
         if (particle.fitness > particle.bestFitness) {
             particle.bestFitness = particle.fitness;
