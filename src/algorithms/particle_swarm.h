@@ -1,25 +1,25 @@
 #ifndef PARTICLE_SWARM_H
 #define PARTICLE_SWARM_H
 
-#include <vector>
 #include "../utils/utils.h"
+#include "../config/config.h"
+#include <vector>
 
 class ParticleSwarmOptimization {
 public:
     ParticleSwarmOptimization(const Parameters& params);
-    Solution run();
+    Particle run();
 
 private:
     Parameters parameters;
+    std::vector<Particle> swarm;
+    Particle globalBest;
 
     void initializeSwarm();
+    void evaluateFitness();
     void updateVelocities();
     void updatePositions();
-    void evaluateFitness();
     bool terminationConditionMet(int iteration);
-
-    std::vector<Particle> swarm;
-    Solution globalBest;
 };
 
 #endif // PARTICLE_SWARM_H

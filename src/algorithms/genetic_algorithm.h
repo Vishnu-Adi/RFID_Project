@@ -1,8 +1,9 @@
 #ifndef GENETIC_ALGORITHM_H
 #define GENETIC_ALGORITHM_H
 
-#include <vector>
 #include "../utils/utils.h"
+#include "../config/config.h"
+#include <vector>
 
 class GeneticAlgorithm {
 public:
@@ -20,4 +21,4 @@ private:
     bool terminationConditionMet(int generation);
 };
 
-#endif // GENETIC_ALGORITHM_H
+#endif 

@@ -25,29 +25,78 @@ Solution GeneticAlgorithm::run() {
 }
 
 std::vector<Solution> GeneticAlgorithm::initializePopulation() {
-    // Implementation to initialize the population
-    return {};
+    std::vector<Solution> population(parameters.populationSize);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::bernoulli_distribution d(0.5);
+
+    for (auto& individual : population) {
+        individual.positions.resize(parameters.numPositions);
+        for (auto& gene : individual.positions) {
+            gene = d(gen);
+        }
+    }
+    return population;
 }
 
 void GeneticAlgorithm::evaluateFitness(std::vector<Solution>& population) {
-    // Calculate fitness for each individual
     for (auto& individual : population) {
         individual.fitness = calculateFitness(individual);
     }
 }
 
 std::vector<Solution> GeneticAlgorithm::selection(const std::vector<Solution>& population) {
-    // Select individuals based on fitness
-    return {};
+    // Tournament selection
+    std::vector<Solution> selected;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(0, population.size() - 1);
+
+    for (size_t i = 0; i < population.size(); ++i) {
+        auto& individual1 = population[dist(gen)];
+        auto& individual2 = population[dist(gen)];
+        selected.push_back(individual1.fitness > individual2.fitness ? individual1 : individual2);
+    }
+    return selected;
 }
 
 std::vector<Solution> GeneticAlgorithm::crossover(const std::vector<Solution>& parents) {
-    // Generate offspring through crossover
-    return {};
+    std::vector<Solution> offspring;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(1, parameters.numPositions - 1);
+
+    for (size_t i = 0; i < parents.size(); i += 2) {
+        Solution parent1 = parents[i];
+        Solution parent2 = parents[(i + 1) % parents.size()];
+        int crossoverPoint = dist(gen);
+
+        Solution child1 = parent1;
+        Solution child2 = parent2;
+
+        std::copy(parent2.positions.begin() + crossoverPoint, parent2.positions.end(),
+                  child1.positions.begin() + crossoverPoint);
+        std::copy(parent1.positions.begin() + crossoverPoint, parent1.positions.end(),
+                  child2.positions.begin() + crossoverPoint);
+
+        offspring.push_back(child1);
+        offspring.push_back(child2);
+    }
+    return offspring;
 }
 
 void GeneticAlgorithm::mutation(std::vector<Solution>& offspring) {
-    // Mutate the offspring
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::bernoulli_distribution mutationChance(parameters.mutationRate);
+
+    for (auto& individual : offspring) {
+        for (auto& gene : individual.positions) {
+            if (mutationChance(gen)) {
+                gene = !gene;
+            }
+        }
+    }
 }
 
 bool GeneticAlgorithm::terminationConditionMet(int generation) {

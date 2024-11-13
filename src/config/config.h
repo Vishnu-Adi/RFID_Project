@@ -1,14 +1,23 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "../utils/utils.h"
+struct Parameters {
+    // Genetic Algorithm parameters
+    int populationSize;
+    int numPositions;
+    double mutationRate;
+    int maxGenerations;
 
-const Parameters DEFAULT_PARAMETERS = {
-    50,   // populationSize
-    100,  // maxGenerations
-    30,   // swarmSize
-    1000  // maxIterations
-    // Initialize other parameters as needed
+    // Particle Swarm Optimization parameters
+    int swarmSize;
+    int numDimensions;
+    int maxIterations;
+    double positionMin;
+    double positionMax;
+    double velocityMax;
+    double inertiaWeight;
+    double cognitiveCoefficient;
+    double socialCoefficient;
 };
 
 #endif // CONFIG_H

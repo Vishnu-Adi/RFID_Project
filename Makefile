@@ -10,10 +10,5 @@ TEST_OBJ = $(TEST_SRC:.cpp=.o)
 all: main tests
 
 main: $(OBJ)
-    $(CXX) $(CXXFLAGS) -o bin/main $^ $(LDFLAGS)
+\t$(CXX) $(CXXFLAGS) -o bin/main $^ $(LDFLAGS)
 
-tests: $(OBJ) $(TEST_OBJ)
-    $(CXX) $(CXXFLAGS) -o bin/tests $^ -lgtest $(LDFLAGS)
-
-clean:
-    rm -f $(OBJ) $(TEST_OBJ) bin/main bin/tests
