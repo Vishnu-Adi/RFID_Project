@@ -18,47 +18,48 @@ This project focuses on optimizing the placement of RFID tags within a grid-base
   - `pandas`
   - `matplotlib`
 
-Install Python dependencies using `pip`:
+### Install Python dependencies using `pip`:
 
-```bash
-pip install pandas matplotlib
+     pip install pandas matplotlib
 
-Compilation Instructions:
+### Compilation Instructions:
 
-Using Command Line
+## Using Command Line
 Navigate to the project root directory and execute the following command:
+
 g++ -std=c++11 src/main.cpp src/algorithms/genetic_algorithm.cpp src/algorithms/particle_swarm.cpp src/utils/utils.cpp src/tests/test_runner.cpp -o optimization_app
 
 or Using clangd++:
+
 clang++ -std=c++11 src/main.cpp src/algorithms/genetic_algorithm.cpp src/algorithms/particle_swarm.cpp src/utils/utils.cpp src/tests/test_runner.cpp -o optimization_app
 
 
-Running the Application
+### Running the Application
 After successful compilation, execute the application:
 
 ./optimization_app
 
-Application Modes
-Run Optimization:
+### Application Modes
+## Run Optimization:
 
 Select Optimization Method: Choose between Genetic Algorithm (GA) or Particle Swarm Optimization (PSO).
 View Results: The best solution found by the selected algorithm will be displayed, including tag positions and fitness score.
-Run Tests:
+
+## Run Tests:
 
 Executes predefined test cases for both GA and PSO across different grid sizes.
 Results are saved in ga_results.csv and pso_results.csv.
 Generate visualizations by running the visualize_results.py script.
 
 
-Visualization
-Generating Plots
-Navigate to the scripts/ directory and run the visualization 
+### Visualization
+## Generating Plots
+## script:
+python visualize_results.py or python3 visualize_results.py
 
-script:
-python visualize_results.py
 
-```
 
+### Project Structure
 RFID_Tag_Placement_Optimization/
 ├── src/
 │   ├── algorithms/
@@ -75,8 +76,8 @@ RFID_Tag_Placement_Optimization/
 │   │   ├── utils.h
 │   │   └── utils.cpp
 │   └── main.cpp
-├── scripts/
-│   └── visualize_results.py
+├
+│── visualize_results.py
 |
 ├── README.md
 ├── ga_results.csv
