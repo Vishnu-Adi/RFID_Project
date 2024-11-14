@@ -1,5 +1,3 @@
-// File: src/algorithms/genetic_algorithm.cpp
-
 #include "genetic_algorithm.h"
 #include <algorithm>
 #include <random>
@@ -31,11 +29,11 @@ Solution GeneticAlgorithm::run() {
                         });
 }
 
-std::vector<Solution> GeneticAlgorithm::initializePopulation() {
-    std::vector<Solution> population(parameters.populationSize);
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::bernoulli_distribution d(0.5); // 50% chance of placing a tag
+vector<Solution> GeneticAlgorithm::initializePopulation() {
+    vector<Solution> population(parameters.populationSize);
+    random_device rd;
+    mt19937 gen(rd());
+    bernoulli_distribution d(0.5); // 50% chance of placing a tag
 
     for (auto& individual : population) {
         individual.positions.resize(parameters.numPositions);
@@ -46,17 +44,17 @@ std::vector<Solution> GeneticAlgorithm::initializePopulation() {
     return population;
 }
 
-void GeneticAlgorithm::evaluateFitness(std::vector<Solution>& population) {
+void GeneticAlgorithm::evaluateFitness(vector<Solution>& population) {
     for (auto& individual : population) {
         individual.fitness = calculateFitness(individual, parameters.gridSize);
     }
 }
 
-std::vector<Solution> GeneticAlgorithm::selection(const std::vector<Solution>& population) {
-    std::vector<Solution> selected;
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(0, population.size() - 1);
+vector<Solution> GeneticAlgorithm::selection(const vector<Solution>& population) {
+    vector<Solution> selected;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(0, population.size() - 1);
 
     // Tournament Selection
     for (size_t i = 0; i < population.size(); ++i) {
@@ -67,11 +65,11 @@ std::vector<Solution> GeneticAlgorithm::selection(const std::vector<Solution>& p
     return selected;
 }
 
-std::vector<Solution> GeneticAlgorithm::crossover(const std::vector<Solution>& parents) {
-    std::vector<Solution> offspring;
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(1, parameters.numPositions - 1); // Crossover point
+vector<Solution> GeneticAlgorithm::crossover(const vector<Solution>& parents) {
+    vector<Solution> offspring;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, parameters.numPositions - 1); // Crossover point
 
     for (size_t i = 0; i < parents.size(); i += 2) {
         Solution parent1 = parents[i];
@@ -82,9 +80,9 @@ std::vector<Solution> GeneticAlgorithm::crossover(const std::vector<Solution>& p
         Solution child2 = parent2;
 
         // Swap genes after the crossover point
-        std::copy(parent2.positions.begin() + crossoverPoint, parent2.positions.end(),
+        copy(parent2.positions.begin() + crossoverPoint, parent2.positions.end(),
                   child1.positions.begin() + crossoverPoint);
-        std::copy(parent1.positions.begin() + crossoverPoint, parent1.positions.end(),
+        copy(parent1.positions.begin() + crossoverPoint, parent1.positions.end(),
                   child2.positions.begin() + crossoverPoint);
 
         offspring.push_back(child1);
@@ -93,10 +91,10 @@ std::vector<Solution> GeneticAlgorithm::crossover(const std::vector<Solution>& p
     return offspring;
 }
 
-void GeneticAlgorithm::mutation(std::vector<Solution>& offspring) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::bernoulli_distribution mutationChance(parameters.mutationRate);
+void GeneticAlgorithm::mutation(vector<Solution>& offspring) {
+    random_device rd;
+    mt19937 gen(rd());
+    bernoulli_distribution mutationChance(parameters.mutationRate);
 
     for (auto& individual : offspring) {
         for (auto& gene : individual.positions) {

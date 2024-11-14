@@ -1,5 +1,3 @@
-// File: src/algorithms/particle_swarm.h
-
 #ifndef PARTICLE_SWARM_H
 #define PARTICLE_SWARM_H
 
@@ -7,6 +5,7 @@
 #include "../config/config.h"
 #include <vector>
 
+using namespace std;
 class ParticleSwarmOptimization {
 public:
     ParticleSwarmOptimization(const Parameters& params);
@@ -14,7 +13,7 @@ public:
 
 private:
     Parameters parameters;
-    std::vector<Particle> swarm;
+    vector<Particle> swarm;
     Particle globalBest;
 
     void initializeSwarm();

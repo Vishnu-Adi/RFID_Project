@@ -1,5 +1,3 @@
-// File: src/algorithms/genetic_algorithm.h
-
 #ifndef GENETIC_ALGORITHM_H
 #define GENETIC_ALGORITHM_H
 
@@ -15,11 +13,11 @@ public:
 private:
     Parameters parameters;
 
-    std::vector<Solution> initializePopulation();
-    void evaluateFitness(std::vector<Solution>& population);
-    std::vector<Solution> selection(const std::vector<Solution>& population);
-    std::vector<Solution> crossover(const std::vector<Solution>& parents);
-    void mutation(std::vector<Solution>& offspring);
+    vector<Solution> initializePopulation();
+    void evaluateFitness(vector<Solution>& population);
+    vector<Solution> selection(const vector<Solution>& population);
+    vector<Solution> crossover(const vector<Solution>& parents);
+    void mutation(vector<Solution>& offspring);
     bool terminationConditionMet(int generation);
 };
 

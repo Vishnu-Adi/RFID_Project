@@ -1,5 +1,3 @@
-// File: src/algorithms/particle_swarm.cpp
-
 #include "particle_swarm.h"
 #include <algorithm>
 #include <random>
@@ -29,13 +27,13 @@ Particle ParticleSwarmOptimization::run() {
 }
 
 void ParticleSwarmOptimization::initializeSwarm() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> posDis(parameters.positionMin, parameters.positionMax);
-    std::uniform_real_distribution<> velDis(-parameters.velocityMax, parameters.velocityMax);
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<> posDis(parameters.positionMin, parameters.positionMax);
+    uniform_real_distribution<> velDis(-parameters.velocityMax, parameters.velocityMax);
 
     swarm.resize(parameters.swarmSize);
-    globalBest.fitness = std::numeric_limits<double>::lowest();
+    globalBest.fitness = numeric_limits<double>::lowest();
 
     for (auto& particle : swarm) {
         particle.position.resize(parameters.numDimensions);
@@ -72,9 +70,9 @@ void ParticleSwarmOptimization::evaluateFitness() {
 }
 
 void ParticleSwarmOptimization::updateVelocities() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> randDis(0.0, 1.0);
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<> randDis(0.0, 1.0);
 
     for (auto& particle : swarm) {
         for (int d = 0; d < parameters.numDimensions; ++d) {

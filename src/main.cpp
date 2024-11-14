@@ -1,5 +1,3 @@
-// File: src/main.cpp
-
 #include <iostream>
 #include <vector>
 #include "algorithms/genetic_algorithm.h"
@@ -8,34 +6,36 @@
 #include "utils/utils.h"
 #include "tests/test_runner.h"
 
+using namespace std;
+
 void displaySolution(const Solution& solution, int gridSize) {
-    std::cout << "Tag Positions (1 indicates a tag):" << std::endl;
+    cout << "Tag Positions (1 indicates a tag):" << endl;
     for (int i = 0; i < solution.positions.size(); ++i) {
-        std::cout << solution.positions[i] << " ";
+        cout << solution.positions[i] << " ";
         if ((i + 1) % gridSize == 0) {
-            std::cout << std::endl;
+            cout << endl;
         }
     }
-    std::cout << "Fitness: " << solution.fitness << std::endl;
+    cout << "Fitness: " << solution.fitness << endl;
 }
 
 void displayParticle(const Particle& particle, int gridSize) {
-    std::cout << "Tag Positions (values > 0.5 indicate a tag):" << std::endl;
+    cout << "Tag Positions (values > 0.5 indicate a tag):" << endl;
     for (int i = 0; i < particle.position.size(); ++i) {
-        std::cout << (particle.position[i] > 0.5 ? 1 : 0) << " ";
+        cout << (particle.position[i] > 0.5 ? 1 : 0) << " ";
         if ((i + 1) % gridSize == 0) {
-            std::cout << std::endl;
+            cout << endl;
         }
     }
-    std::cout << "Fitness: " << particle.fitness << std::endl;
+    cout << "Fitness: " << particle.fitness << endl;
 }
 
 int main() {
-    std::cout << "Select mode:\n";
-    std::cout << "1. Run Optimization\n";
-    std::cout << "2. Run Tests\n";
+    cout << "Select mode:\n";
+    cout << "1. Run Optimization\n";
+    cout << "2. Run Tests\n";
     int choice;
-    std::cin >> choice;
+    cin >> choice;
 
     if (choice == 1) {
         Parameters params = {
@@ -58,30 +58,30 @@ int main() {
             10      // gridSize
         };
 
-        std::cout << "Select optimization method:\n";
-        std::cout << "1. Genetic Algorithm\n";
-        std::cout << "2. Particle Swarm Optimization\n";
+        cout << "Select optimization method:\n";
+        cout << "1. Genetic Algorithm\n";
+        cout << "2. Particle Swarm Optimization\n";
         int optChoice;
-        std::cin >> optChoice;
+        cin >> optChoice;
 
         if (optChoice == 1) {
             GeneticAlgorithm ga(params);
             Solution bestSolution = ga.run();
-            std::cout << "\nBest Solution (GA):" << std::endl;
+            cout << "\nBest Solution (GA):" << endl;
             displaySolution(bestSolution, params.gridSize);
         } else if (optChoice == 2) {
             ParticleSwarmOptimization pso(params);
             Particle bestParticle = pso.run();
-            std::cout << "\nBest Particle (PSO):" << std::endl;
+            cout << "\nBest Particle (PSO):" << endl;
             displayParticle(bestParticle, params.gridSize);
         } else {
-            std::cout << "Invalid choice." << std::endl;
+            cout << "Invalid choice." << endl;
         }
     } else if (choice == 2) {
         TestRunner tester;
         tester.runTests();
     } else {
-        std::cout << "Invalid choice." << std::endl;
+        cout << "Invalid choice." << endl;
     }
 
     return 0;

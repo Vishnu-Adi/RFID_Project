@@ -1,5 +1,3 @@
-// File: src/tests/test_runner.h
-
 #ifndef TEST_RUNNER_H
 #define TEST_RUNNER_H
 
@@ -9,6 +7,7 @@
 #include "../utils/utils.h"
 #include <vector>
 
+using namespace std;
 class TestRunner {
 public:
     TestRunner();
@@ -19,15 +18,15 @@ private:
     void testPSO(const Parameters& params, Result& result);
     void printResults();
 
-    std::vector<Parameters> gaTestCases;
-    std::vector<Parameters> psoTestCases;
-    std::vector<Result> gaResults;
-    std::vector<Result> psoResults;
+    vector<Parameters> gaTestCases;
+    vector<Parameters> psoTestCases;
+    vector<Result> gaResults;
+    vector<Result> psoResults;
 
     void initializeTestCases();
 
     // Helper method to calculate standard deviation
-    double calculateStdDev(const std::vector<double>& values, double mean);
+    double calculateStdDev(const vector<double>& values, double mean);
 };
 
-#endif // TEST_RUNNER_H
+#endif 
