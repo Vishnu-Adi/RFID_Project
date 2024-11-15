@@ -79,12 +79,11 @@ After successful compilation, execute the application:
          ├── README.md
          ├── ga_results.csv
          ├── pso_results.csv
-         └── plots/
-             ├── fitness_vs_grid_size.png
-                 ├── time_vs_grid_size.png
-                     ├── fitness_vs_time.png
-                         ├── fitness_comparison.png
-                             └── time_comparison.png
+         |── fitness_vs_grid_size.png
+         ├── time_vs_grid_size.png
+         ├── fitness_vs_time.png
+         ├── fitness_comparison.png
+         └── time_comparison.png
 
 
 
