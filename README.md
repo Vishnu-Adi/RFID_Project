@@ -47,17 +47,14 @@ After successful compilation, execute the application:
 
 ## Run Tests:
 
-Executes predefined test cases for both GA and PSO across different grid sizes.
+        Executes predefined test cases for both GA and PSO across different grid sizes.
          Results are saved in ga_results.csv and pso_results.csv.
          Generate visualizations by running the visualize_results.py script.
 
 
-# Visualization
-## Generating Plots
+# Visualization - Generating Plots
 ## script:
          python visualize_results.py or python3 visualize_results.py
-
-
 
 ### Project Structure
          RFID_Tag_Placement_Optimization/
