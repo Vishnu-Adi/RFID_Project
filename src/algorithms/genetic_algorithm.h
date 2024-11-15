@@ -5,10 +5,11 @@
 #include "../config/config.h"
 #include <vector>
 
+using namespace std;
 class GeneticAlgorithm {
 public:
     GeneticAlgorithm(const Parameters& params);
-    Solution run(); // Executes the GA and returns the best solution found
+    Solution run(); 
 
 private:
     Parameters parameters;
@@ -21,4 +22,4 @@ private:
     bool terminationConditionMet(int generation);
 };
 
-#endif // GENETIC_ALGORITHM_H
+#endif

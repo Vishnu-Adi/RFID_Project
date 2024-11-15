@@ -1,15 +1,12 @@
-// File: src/utils/utils.cpp
-
 #include "utils.h"
 #include <cmath>
 #include <vector>
 
-int GRID_SIZE = 10; // Default value
+using namespace std;
+int GRID_SIZE = 10; // Default 
 int TOTAL_CELLS = GRID_SIZE * GRID_SIZE;
-
-// Helper function to get neighboring cells
-std::vector<std::pair<int, int>> getNeighbors(int x, int y, int gridSize) {
-    std::vector<std::pair<int, int>> neighbors;
+vector<pair<int, int>> getNeighbors(int x, int y, int gridSize) {
+    vector<pair<int, int>> neighbors;
     for (int dx = -1; dx <= 1; ++dx) {
         for (int dy = -1; dy <= 1; ++dy) {
             int nx = x + dx;
@@ -22,10 +19,10 @@ std::vector<std::pair<int, int>> getNeighbors(int x, int y, int gridSize) {
     return neighbors;
 }
 
-// GA: Compute coverage based on tag positions
+// GA
 double computeCoverage(const Solution& solution, int gridSize) {
     // Grid to mark covered cells
-    std::vector<std::vector<bool>> coverageGrid(gridSize, std::vector<bool>(gridSize, false));
+    vector<vector<bool>> coverageGrid(gridSize, vector<bool>(gridSize, false));
 
     // Mark cells covered by tags
     for (int i = 0; i < solution.positions.size(); ++i) {
@@ -49,10 +46,10 @@ double computeCoverage(const Solution& solution, int gridSize) {
         }
     }
 
-    return static_cast<double>(coveredCells) / (gridSize * gridSize); // Coverage ratio between 0 and 1
+    return static_cast<double>(coveredCells) / (gridSize * gridSize); 
 }
 
-// GA: Compute cost based on number of tags used
+// GA
 double computeCost(const Solution& solution) {
     int tagsUsed = 0;
     for (int tagPlaced : solution.positions) {
@@ -63,11 +60,10 @@ double computeCost(const Solution& solution) {
     return static_cast<double>(tagsUsed); // Cost is proportional to tags used
 }
 
-// PSO: Compute coverage for continuous positions
-double computeCoverage(const std::vector<double>& position, int gridSize) {
-    // Interpret the continuous positions as probabilities of placing a tag
+// PSO
+double computeCoverage(const vector<double>& position, int gridSize) {
     // Place a tag if the value is greater than 0.5
-    std::vector<int> tagPositions(position.size());
+    vector<int> tagPositions(position.size());
     for (int i = 0; i < position.size(); ++i) {
         tagPositions[i] = position[i] > 0.5 ? 1 : 0;
     }
@@ -78,7 +74,7 @@ double computeCoverage(const std::vector<double>& position, int gridSize) {
 }
 
 // PSO: Compute cost similar to GA
-double computeCost(const std::vector<double>& position) {
+double computeCost(const vector<double>& position) {
     int tagsUsed = 0;
     for (double posValue : position) {
         if (posValue > 0.5) {
@@ -97,7 +93,7 @@ double calculateFitness(const Solution& solution, int gridSize) {
     return coverage / cost;
 }
 
-double calculateFitness(const std::vector<double>& position, int gridSize) {
+double calculateFitness(const vector<double>& position, int gridSize) {
     double coverage = computeCoverage(position, gridSize);
     double cost = computeCost(position);
     if (cost == 0.0) {

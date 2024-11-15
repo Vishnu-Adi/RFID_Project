@@ -64,7 +64,7 @@ void TestRunner::runTests() {
         Result avgResult;
         avgResult.fitness = avgFitness;
         avgResult.executionTime = avgTime;
-        avgResult.generations = params.maxGenerations; // Or average if dynamic
+        avgResult.generations = params.maxGenerations; 
         gaResults.push_back(avgResult);
 
         cout << "GA GridSize: " << params.gridSize << ", Avg Fitness: " << avgFitness
@@ -99,7 +99,7 @@ void TestRunner::runTests() {
                   << ", StdDev: " << stddevFitness << ", Avg Time: " << avgTime << "s\n";
     }
 
-    // Optionally write results to files
+
     printResults();
 }
 

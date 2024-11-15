@@ -23,4 +23,4 @@ struct Parameters {
     int gridSize;          // Grid size for dynamic grids
 };
 
-#endif // CONFIG_H
+#endif 

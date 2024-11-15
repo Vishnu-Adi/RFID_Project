@@ -9,7 +9,7 @@ using namespace std;
 class ParticleSwarmOptimization {
 public:
     ParticleSwarmOptimization(const Parameters& params);
-    Particle run(); // Executes the PSO and returns the best particle found
+    Particle run(); 
 
 private:
     Parameters parameters;
@@ -22,8 +22,8 @@ private:
     void updatePositions();
     bool terminationConditionMet(int iteration);
 
-    // Helper method to initialize globalBest
+
     void updateGlobalBest();
 };
 
-#endif // PARTICLE_SWARM_H
+#endif 
